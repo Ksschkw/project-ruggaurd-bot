@@ -9,8 +9,8 @@ client = tweepy.Client(
     access_token_secret=ACCESS_TOKEN_SECRET
 )
 
-# Get user ID for a specific username
-username = "_X1X0_"  # Reply’s author
+# Get user ID for a specific username (use this during setup to get dynamic IDs)
+username = "_X1X0_"  # Example; replace with target username for deployment
 try:
     user = client.get_user(username=username, user_auth=True).data
     print(f"User ID for @{username}: {user.id}")

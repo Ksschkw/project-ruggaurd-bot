@@ -1,8 +1,14 @@
 def get_new_triggers(client):
-    """Search for new replies containing '@_Kosisochuk riddle me this' using API v2."""
-    query = "@_Kosisochuk riddle me this filter:replies"
+    """Search for new replies containing the trigger phrase using API v2.
+    Note: Set to '@_Kosisochuk' for testing; update to '@projectruggaurd' for deployment."""
+    query = "@_Kosisochuk riddle me this is:reply"  # Update to "@projectruggaurd riddle me this is:reply" for final use
     try:
-        tweets = client.search_recent_tweets(query=query, max_results=100, tweet_fields=['in_reply_to_status_id'], user_auth=True).data or []
+        tweets = client.search_recent_tweets(
+            query=query,
+            max_results=100,
+            tweet_fields=['referenced_tweets', 'author_id'],
+            user_auth=True
+        ).data or []
         print(f"API v2 search returned {len(tweets)} tweets.")
     except Exception as e:
         print(f"Error in search_recent_tweets: {e}")
